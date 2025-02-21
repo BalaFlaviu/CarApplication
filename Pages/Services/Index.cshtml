@@ -1,0 +1,39 @@
+﻿@page
+@model CarApplication.Pages.Services.IndexModel
+
+@{
+    ViewData["Title"] = "Service-uri";
+}
+
+<h1>Service-uri</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Adaugă Service Nou</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Descriere</th>
+            <th>Mașină</th>
+            <th>Proprietar</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Service)
+        {
+            <tr>
+                <td>@item.ServiceDate.ToShortDateString()</td>
+                <td>@item.Description</td>
+                <td>@($"{item.Car?.Brand} {item.Car?.Model}")</td>
+                <td>@item.Car?.Owner?.Name</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

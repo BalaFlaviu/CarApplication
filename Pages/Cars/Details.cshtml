@@ -1,0 +1,29 @@
+﻿@page
+@model CarApplication.Pages.Cars.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalii Mașină";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-sm-4">Brand</dt>
+                <dd class="col-sm-8">@Model.Car.Brand</dd>
+                <dt class="col-sm-4">Model</dt>
+                <dd class="col-sm-8">@Model.Car.Model</dd>
+                <dt class="col-sm-4">An</dt>
+                <dd class="col-sm-8">@Model.Car.Year</dd>
+                <dt class="col-sm-4">Proprietar</dt>
+                <dd class="col-sm-8">@(Model.Car.Owner?.Name ?? "Fără proprietar")</dd>
+            </dl>
+        </div>
+    </div>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Car.Id" class="btn btn-warning">Editează</a>
+        <a asp-page="./Index" class="btn btn-secondary">Înapoi la listă</a>
+    </div>
+</div>

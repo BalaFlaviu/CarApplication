@@ -1,0 +1,39 @@
+﻿@page
+@model CarApplication.Pages.Cars.IndexModel
+
+@{
+    ViewData["Title"] = "Mașini";
+}
+
+<h1>Mașini</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Adaugă Mașină Nouă</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>An</th>
+            <th>Proprietar</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Car)
+        {
+            <tr>
+                <td>@item.Brand</td>
+                <td>@item.Model</td>
+                <td>@item.Year</td>
+                <td>@(item.Owner?.Name ?? "Fără proprietar")</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

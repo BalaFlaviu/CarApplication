@@ -1,0 +1,35 @@
+﻿@page
+@model CarApplication.Pages.Services.DeleteModel
+
+@{
+    ViewData["Title"] = "Ștergere Service";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Ești sigur că vrei să ștergi această înregistrare?</h3>
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">Data Service</dt>
+                <dd class="col-sm-8">@Model.Service.ServiceDate.ToShortDateString()</dd>
+
+                <dt class="col-sm-4">Descriere</dt>
+                <dd class="col-sm-8">@Model.Service.Description</dd>
+
+                <dt class="col-sm-4">Mașină</dt>
+                <dd class="col-sm-8">@($"{Model.Service.Car?.Brand} {Model.Service.Car?.Model}")</dd>
+
+                <dt class="col-sm-4">Proprietar</dt>
+                <dd class="col-sm-8">@Model.Service.Car?.Owner?.Name</dd>
+            </dl>
+
+            <form method="post">
+                <input type="hidden" asp-for="Service.Id" />
+                <input type="submit" value="Șterge" class="btn btn-danger" />
+                <a asp-page="./Index" class="btn btn-secondary">Înapoi la listă</a>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bine ați venit!</h1>
+    <p class="lead">Sistem de Management Auto</p>
+
+    <div class="row mt-4 justify-content-center">
+        <div class="col-md-6">
+            <div class="d-grid gap-3">
+                <a class="btn btn-primary btn-lg" href="/Cars">
+                    <i class="bi bi-car-front"></i> Gestionare Mașini
+                </a>
+                <a class="btn btn-success btn-lg" href="/Owners">
+                    <i class="bi bi-people"></i> Gestionare Proprietari
+                </a>
+                <a class="btn btn-info btn-lg" href="/Services">
+                    <i class="bi bi-tools"></i> Service-uri
+                </a>
+                <a class="btn btn-warning btn-lg" href="/Insurances">
+                    <i class="bi bi-shield-check"></i> Asigurări
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

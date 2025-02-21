@@ -1,0 +1,32 @@
+﻿@page
+@model CarApplication.Pages.Services.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalii Service";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">Data Service</dt>
+                <dd class="col-sm-8">@Model.Service.ServiceDate.ToShortDateString()</dd>
+
+                <dt class="col-sm-4">Descriere</dt>
+                <dd class="col-sm-8">@Model.Service.Description</dd>
+
+                <dt class="col-sm-4">Mașină</dt>
+                <dd class="col-sm-8">@($"{Model.Service.Car?.Brand} {Model.Service.Car?.Model}")</dd>
+
+                <dt class="col-sm-4">Proprietar</dt>
+                <dd class="col-sm-8">@Model.Service.Car?.Owner?.Name</dd>
+            </dl>
+        </div>
+    </div>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Service.Id" class="btn btn-warning">Editează</a>
+        <a asp-page="./Index" class="btn btn-secondary">Înapoi la listă</a>
+    </div>
+</div>

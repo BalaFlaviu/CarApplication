@@ -1,0 +1,32 @@
+﻿@page
+@model CarApplication.Pages.Cars.DeleteModel
+
+@{
+    ViewData["Title"] = "Ștergere Mașină";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Ești sigur că vrei să ștergi această mașină?</h3>
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-sm-4">Brand</dt>
+                <dd class="col-sm-8">@Model.Car.Brand</dd>
+                <dt class="col-sm-4">Model</dt>
+                <dd class="col-sm-8">@Model.Car.Model</dd>
+                <dt class="col-sm-4">An</dt>
+                <dd class="col-sm-8">@Model.Car.Year</dd>
+                <dt class="col-sm-4">Proprietar</dt>
+                <dd class="col-sm-8">@(Model.Car.Owner?.Name ?? "Fără proprietar")</dd>
+            </dl>
+
+            <form method="post">
+                <input type="hidden" asp-for="Car.Id" />
+                <input type="submit" value="Șterge" class="btn btn-danger" />
+                <a asp-page="./Index" class="btn btn-secondary">Înapoi la listă</a>
+            </form>
+        </div>
+    </div>
+</div>

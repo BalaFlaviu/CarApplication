@@ -1,0 +1,44 @@
+﻿@page
+@model CarApplication.Pages.Insurances.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalii Asigurare";
+    var isExpired = Model.Insurance.EndDate < DateTime.Now;
+    var isExpiringSoon = Model.Insurance.EndDate < DateTime.Now.AddDays(30) && !isExpired;
+    var statusClass = isExpired ? "text-danger" : (isExpiringSoon ? "text-warning" : "text-success");
+    var statusText = isExpired ? "Expirată" : (isExpiringSoon ? "Expiră curând" : "Activă");
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">Tip Asigurare</dt>
+                <dd class="col-sm-8">@Model.Insurance.Type</dd>
+
+                <dt class="col-sm-4">Data Început</dt>
+                <dd class="col-sm-8">@Model.Insurance.StartDate.ToShortDateString()</dd>
+
+                <dt class="col-sm-4">Data Sfârșit</dt>
+                <dd class="col-sm-8">@Model.Insurance.EndDate.ToShortDateString()</dd>
+
+                <dt class="col-sm-4">Status</dt>
+                <dd class="col-sm-8">
+                    <span class="@statusClass"><strong>@statusText</strong></span>
+                </dd>
+
+                <dt class="col-sm-4">Mașină</dt>
+                <dd class="col-sm-8">@($"{Model.Insurance.Car?.Brand} {Model.Insurance.Car?.Model}")</dd>
+
+                <dt class="col-sm-4">Proprietar</dt>
+                <dd class="col-sm-8">@Model.Insurance.Car?.Owner?.Name</dd>
+            </dl>
+        </div>
+    </div>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Insurance.Id" class="btn btn-warning">Editează</a>
+        <a asp-page="./Index" class="btn btn-secondary">Înapoi la listă</a>
+    </div>
+</div>

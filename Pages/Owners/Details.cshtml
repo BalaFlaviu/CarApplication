@@ -1,0 +1,36 @@
+﻿@page
+@model CarApplication.Pages.Owners.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalii Proprietar";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-sm-3">Nume</dt>
+                <dd class="col-sm-9">@Model.Owner.Name</dd>
+                <dt class="col-sm-3">Telefon</dt>
+                <dd class="col-sm-9">@Model.Owner.Phone</dd>
+            </dl>
+
+            @if (Model.Owner.Cars != null && Model.Owner.Cars.Any())
+            {
+                <h4>Mașini deținute:</h4>
+                <ul>
+                    @foreach (var car in Model.Owner.Cars)
+                    {
+                        <li>@car.Brand @car.Model (@car.Year)</li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Owner.Id" class="btn btn-warning">Editează</a>
+        <a asp-page="./Index" class="btn btn-secondary">Înapoi la listă</a>
+    </div>
+</div>

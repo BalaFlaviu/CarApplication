@@ -1,0 +1,43 @@
+﻿@page
+@model CarApplication.Pages.Owners.IndexModel
+
+@{
+    ViewData["Title"] = "Proprietari";
+}
+
+<h1>Proprietari</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Adaugă Proprietar Nou</a>
+</p>
+
+@if (Model.Owner != null && Model.Owner.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nume</th>
+                <th>Telefon</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Owner)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Phone</td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nu există proprietari înregistrați.</p>
+}

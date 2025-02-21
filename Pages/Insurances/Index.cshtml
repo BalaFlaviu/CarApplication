@@ -1,0 +1,51 @@
+﻿@page
+@model CarApplication.Pages.Insurances.IndexModel
+
+@{
+    ViewData["Title"] = "Asigurări";
+}
+
+<h1>Asigurări</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Adaugă Asigurare Nouă</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tip Asigurare</th>
+            <th>Mașină</th>
+            <th>Proprietar</th>
+            <th>Valabilitate</th>
+            <th>Status</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Insurance)
+        {
+            var isExpired = item.EndDate < DateTime.Now;
+            var isExpiringSoon = item.EndDate < DateTime.Now.AddDays(30) && !isExpired;
+            var statusClass = isExpired ? "text-danger" : (isExpiringSoon ? "text-warning" : "text-success");
+            var statusText = isExpired ? "Expirată" : (isExpiringSoon ? "Expiră curând" : "Activă");
+
+            <tr>
+                <td>@item.Type</td>
+                <td>@($"{item.Car?.Brand} {item.Car?.Model}")</td>
+                <td>@item.Car?.Owner?.Name</td>
+                <td>
+                    <div>Start: @item.StartDate.ToShortDateString()</div>
+                    <div>Final: @item.EndDate.ToShortDateString()</div>
+                </td>
+                <td class="@statusClass">
+                    <strong>@statusText</strong>
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
